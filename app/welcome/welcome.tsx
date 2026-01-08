@@ -9,7 +9,7 @@ export function Welcome({ message }: { message: string }) {
     const formData = new FormData(e.target);
     
     // Send to Cloudflare Worker instead of directly to Salesforce
-    const response = await fetch('https://your-worker.your-subdomain.workers.dev', {
+    const response = await fetch('https://webtolead.pratikcmkulkarni.workers.dev/', {
       method: 'POST',
       body: formData
     });
@@ -46,7 +46,7 @@ export function Welcome({ message }: { message: string }) {
             </p>
             <div className="App">
               <form
-                action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D7z00000Op4lN"
+                onSubmit={handleSubmit}
                 method="POST"
               >
                 <input type="hidden" name="oid" value="00D7z00000Op4lN" />
