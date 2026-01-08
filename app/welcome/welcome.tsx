@@ -3,17 +3,6 @@ import logoLight from "./logo-light.svg";
 import { useEffect } from 'react';
 
 export function Welcome({ message }: { message: string }) {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
