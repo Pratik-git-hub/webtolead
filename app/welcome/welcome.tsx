@@ -1,7 +1,38 @@
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
+import { useEffect } from 'react';
 
 export function Welcome({ message }: { message: string }) {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    
+    // Send to Cloudflare Worker instead of directly to Salesforce
+    const response = await fetch('https://your-worker.your-subdomain.workers.dev', {
+      method: 'POST',
+      body: formData
+    });
+
+    const result = await response.json();
+    if (result.success) {
+      window.location.href = 'http://adworks--teamdev.sandbox.lightning.force.com/lightning/page/home';
+    } else {
+      alert('Verification failed. Please try again.');
+    }
+  };
+  
   return (
     <main className="flex items-center justify-center pt-16 pb-4">
       <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
