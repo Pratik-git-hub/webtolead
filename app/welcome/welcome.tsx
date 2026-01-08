@@ -1,5 +1,5 @@
 import { useEffect, FormEvent } from 'react';
-import './App.css';
+
 
 export function Welcome({ message }: { message: string }) {
   useEffect(() => {
